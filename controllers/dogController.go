@@ -73,7 +73,7 @@ func FileUpload(c *gin.Context) {
 	fmt.Println(dir)
 
 	filepath := "./public/" + filename
- url:=CloudinaryUpload(filepath)
+ url:=CloudinaryUpload(filepath,dni)
 	dog.Pic = url
 	fmt.Print(dog)
 	models.GetDB().Save(&dog)
@@ -81,14 +81,14 @@ func FileUpload(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"filepath": filepath})
 }
 
-func CloudinaryUpload(path string) (url string){
+func CloudinaryUpload(path string,dni string) (url string){
 	cld, _ := cloudinary.NewFromParams("dziaapbmr", "922581187159196", "sY44Tzpsnok0L-SSYx3JhtbF73I")
 ctx := context.Background()
 
-resp, err := cld.Upload.Upload(ctx, path, uploader.UploadParams{PublicID: "docs/sdk/go/apple",
+resp, err := cld.Upload.Upload(ctx, path, uploader.UploadParams{PublicID: dni,
     Transformation: "c_crop,g_center/q_auto/f_auto", Tags: []string{"fruit"}})
 
-		my_image, err := cld.Image("docs/sdk/go/apple")
+		my_image, err := cld.Image(dni)
 		if err != nil {
 				fmt.Println("error")
 		}
