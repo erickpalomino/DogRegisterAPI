@@ -31,3 +31,11 @@ func GetDogByName(name string) ([]Dog, error) {
 	}
 	return d, nil
 }
+
+func GetDogByDni(dni string) (Dog, error) {
+	var d Dog
+	if err := DB.Where(&Dog{DNI: dni}).Find(&d); err != nil {
+		return d, err.Error
+	}
+	return d, nil
+}

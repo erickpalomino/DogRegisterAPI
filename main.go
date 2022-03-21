@@ -23,6 +23,7 @@ func main() {
 	protected.Use(middlewares.JwtAuthMiddleware())
 	protected.GET("/user", controllers.CurrentUser)
 	protected.POST("/dog/register", controllers.RegisterDog)
+	protected.POST("/dog/:dni/upload", controllers.FileUpload)
 	protected.GET("/dog/:name/getByName", controllers.FindDogByName)
 
 	r.Run(":8080")
