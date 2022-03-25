@@ -1,18 +1,21 @@
 package models
 
 import (
+	"time"
+
 	"github.com/jinzhu/gorm"
 )
 
 type Dog struct {
 	gorm.Model
 
-	DNI   string `gorm:"not null;unique" json:"dni"`
-	Name  string `gorm:"size:255;not null" json:"name"`
-	Race  string `gorm:"size:255;not null" json:"race"`
-	Genre string `gorm:"not null" json:"genre"`
-	Birth string `gorm:"not null" json:"birth"`
-	Pic   string `gorm:"size:255" json:"pic"`
+	DNI         uint64       `gorm:"not null;unique" json:"dni"`
+	Name        string       `gorm:"size:255;not null" json:"name"`
+	Race        string       `gorm:"size:255;not null" json:"race"`
+	Genre       string       `gorm:"not null" json:"genre"`
+	Birth       time.Time    `gorm:"not null" json:"birth"`
+	Pic         string       `gorm:"size:255" json:"pic"`
+	Diagnostics []Diagnostic `gorm:"foreignKey:DogDNI" json:"diagnostics"`
 }
 
 func (d *Dog) SaveDog() (*Dog, error) {
@@ -32,7 +35,7 @@ func GetDogByName(name string) ([]Dog, error) {
 	return d, nil
 }
 
-func GetDogByDni(dni string) (Dog, error) {
+func GetDogByDni(dni uint64) (Dog, error) {
 	var d Dog
 	if err := DB.Where(&Dog{DNI: dni}).Find(&d); err != nil {
 		return d, err.Error

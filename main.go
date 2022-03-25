@@ -18,6 +18,7 @@ func main() {
 	public := r.Group("/api")
 	public.POST("/register", controllers.Register)
 	public.POST("/login", controllers.Login)
+	public.POST("/diag", controllers.RegisterDiagnostic)
 
 	protected := r.Group("/api/worker")
 	protected.Use(middlewares.JwtAuthMiddleware())

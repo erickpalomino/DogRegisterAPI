@@ -32,7 +32,7 @@ func InitDB() {
 	}
 
 	DB = conn
-	DB.AutoMigrate(&User{}, &Dog{})
+	DB.AutoMigrate(&User{}, &Dog{}, &Diagnostic{})
 }
 
 //returns a handle to the DB object
