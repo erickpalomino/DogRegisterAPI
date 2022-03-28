@@ -15,10 +15,10 @@ type User struct {
 	gorm.Model
 	Username string `gorm:"size:255;not null;unique" json:"username"`
 	Password string `gorm:"size:255;not null;" json:"password"`
+	Type     string `gorm:"not null" json:"type""`
 }
 
 func (u *User) SaveUser() (*User, error) {
-
 	var err error
 	err = DB.Create(&u).Error
 	if err != nil {

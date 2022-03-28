@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"context"
 	"dog-app/models"
 	"fmt"
 	"io"
@@ -9,9 +8,6 @@ import (
 	"net/http"
 	"os"
 	"strconv"
-
-	"github.com/cloudinary/cloudinary-go"
-	"github.com/cloudinary/cloudinary-go/api/uploader"
 
 	"github.com/gin-gonic/gin"
 )
@@ -28,6 +24,23 @@ func FindDogByName(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"message": "succes", "data": dog})
+}
+
+func FindDogByDNI(c *gin.Context) {
+	dogDNI := c.Params.ByName("dni")
+	dniNum, br := strconv.ParseUint(dogDNI, 10, 64)
+	if br != nil {
+		c.String(http.StatusBadRequest, fmt.Sprintf("parse to int err: #{br.Error()}"))
+		return
+	}
+	dog, err := models.GetDogByDni(dniNum)
+	dog.Diagnostics = dog.GetDiagnosticsFromDog()
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"message": "succes", "data": dog})
+
 }
 
 func RegisterDog(c *gin.Context) {
@@ -80,31 +93,9 @@ func FileUpload(c *gin.Context) {
 	fmt.Println(dir)
 
 	filepath := "./public/" + filename
-	url := CloudinaryUpload(filepath, dni)
+	url, _ := CloudinaryUpload(filepath, dni)
 	dog.Pic = url
 	fmt.Print(dog)
 	models.GetDB().Save(&dog)
-
 	c.JSON(http.StatusOK, gin.H{"filepath": filepath})
-}
-
-func CloudinaryUpload(path string, dni string) (url string) {
-	cld, _ := cloudinary.NewFromParams("dziaapbmr", "922581187159196", "sY44Tzpsnok0L-SSYx3JhtbF73I")
-	ctx := context.Background()
-
-	resp, err := cld.Upload.Upload(ctx, path, uploader.UploadParams{PublicID: dni,
-		Transformation: "c_crop,g_center/q_auto/f_auto", Tags: []string{"fruit"}})
-
-	my_image, err := cld.Image(dni)
-	if err != nil {
-		fmt.Println("error")
-	}
-
-	url, errstring := my_image.String()
-	fmt.Print(resp)
-	if errstring != nil {
-		fmt.Println("error")
-	}
-	fmt.Print(url)
-	return url
 }

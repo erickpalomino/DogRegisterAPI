@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página Personal</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css"
+      integrity="sha384-zEpdAL7W11eTKeoBJK1g79kgl9qjP7g84KfK3AZsuonx38n8ad+f5ZgXtoSDxPOh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script
+      src="https://kit.fontawesome.com/7ba6663cfa.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <nav id="navbar" class="navbar navbar-dark bg-primary px-3">
+      <a class="navbar-brand d-flex" href="#">
+        <div class="ml-3 my-auto">Erick Palomino</div>
+      </a>
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link" style="font-size: 1rem" href="#aboutMe"
+            >Sobre mi</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="font-size: 1rem" href="#experience"
+            >Experiencia</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="font-size: 1rem" href="#ideas"
+            >Intereses</a
+          >
+        </li>
+      </ul>
+    </nav>
+    <div class="container-fluid" style="font-family: Georgia;">
+      <div class="row p-5">
+        <div class="col mt-4">
+          <div
+            data-bs-target="#navbar"
+            data-bs-offset="0"
+            class="scrollspy-example "
+            tabindex="0"
+          >
+          <div>
+            <h2 class="ml-4" id="aboutMe">Sobre Mi</h2>
+
+            <section class="d-flex my-4">
+              <img
+                class="rounded-circle mx-4 my-1"
+                width="20%"
+                src="images/photo.jpeg"
+                alt=""
+              />
+              <h4 class="p-5">Soy un estudiante de ultimos ciclos de la Facultad de Ingeniería de Software de la Universidad Nacional Mayor de San Marcos.
+                Actualmente tengo el cargo de Analista Programador en una empresa de servicios de ingeniería enfocado en el sector bancario.  
+              </h4>
+              
+            
+            </section>
+            <div class="ml-5">
+              <a class="mx-3" href="https://github.com/erickpalomino"
+              ><i style="color: black;" class="fa-brands fa-github fa-4x"></i
+            ></a>
+            <a class="mx-3" href="https://linkedin.com/in/erick-palomino-66a800206"
+              ><i style="color: black" class="fa-brands fa-linkedin fa-4x"></i
+            ></a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="row p-5">
+        <div class="col">
+          <h3 class="ml-4" id="experience">Experiencia</h3>
+
+          <section class="profile d-flex my-4">
+            <div class="col">
+              <div class="card mx-auto" style="width: 18rem">
+                <img
+                  src="images/FISI.png"
+                  width="75%"
+                  class="mx-auto"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h4 class="card-title">Soporte Técnico FISI</h4>
+                  <p class="card-text">
+                    Realizé prácticas como soporte técnico dentro de la
+                    facultad, solucionando problemas técnicos en los
+                    laboratorios y las computadoras de las oficinas internas.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col d-flex">
+              <div class="card mx-auto" style="width: 18rem">
+                <img
+                  src="images/sanms.jfif"
+                  width="70%"
+                  class="mx-auto"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h4 class="card-title">SANMS</h4>
+                  <p class="card-text">
+                    Actualmente me encuentro trabajando como Analista
+                    Programador en una empresa que presta servicios de
+                    desarrollo, mantenimiento y pruebas de software al sector
+                    bancario
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="row p-5">
+        <div class="col">
+          <h2 class="ml-4" id="ideas">Intereses</h2>
+          <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="images/IA.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>Inteligencia Artificial</h5>
+                  
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="images/criptografia.png" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>Criptografía</h5>
+                  
+                </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+      </div>
+    </div>
+
+    
+</div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <footer class="bg-primary text-white "> &copy; Copyright 2022 Erick Palomino </footer>
+  </body>
+</html>
