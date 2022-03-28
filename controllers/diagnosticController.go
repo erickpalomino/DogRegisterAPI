@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"dog-app/models"
+	"dog-app/utils/token"
 	"io"
 	"log"
 	"net/http"
@@ -17,8 +18,15 @@ func RegisterDiagnostic(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-
+	user_id, err := token.ExtractTokenID(c)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	u, err := models.GetUserByID(user_id)
 	diagnostic, err := diag.SaveDiagnostic()
+	diagnostic.Doctor = u.Username
+	models.GetDB().Save(&diagnostic)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

@@ -1,16 +1,22 @@
 package models
 
-import "github.com/jinzhu/gorm"
+import (
+	"github.com/jinzhu/gorm"
+	"time"
+)
 
 type Diagnostic struct {
 	gorm.Model
 
-	Symptom     string  `json:"symptom"`
-	Medicines   string  `json:"medicines"`
-	Price       float32 `json:"price"`
-	BloodResult string  `json:"bloodResult"`
-	XrayPic     string  `json:"xrayPic"`
-	DogID       uint    `json:"dogID"`
+	Symptom     string    `json:"symptom"`
+	Medicines   string    `json:"medicines"`
+	Price       float32   `json:"price"`
+	BloodResult string    `json:"bloodResult"`
+	XrayPic     string    `json:"xrayPic"`
+	Diagnostic  string    `json:"diagnostic"`
+	Date        time.Time `json:"date"`
+	Doctor      string    `json:"doctor""`
+	DogID       uint      `json:"dogID"`
 }
 
 func (d *Diagnostic) SaveDiagnostic() (*Diagnostic, error) {
