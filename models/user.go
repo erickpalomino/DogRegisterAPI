@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+	"fmt"
 	"html"
 	"strings"
 
@@ -15,7 +16,8 @@ type User struct {
 	gorm.Model
 	Username string `gorm:"size:255;not null;unique" json:"username"`
 	Password string `gorm:"size:255;not null;" json:"password"`
-	Type     string `gorm:"not null" json:"type""`
+	Type     string `gorm:"not null" json:"type"`
+	Dates    []Date `json:"dates"`
 }
 
 func (u *User) SaveUser() (*User, error) {
@@ -89,4 +91,23 @@ func GetUserByID(uid uint) (User, error) {
 }
 func (u *User) PrepareGive() {
 	u.Password = ""
+}
+func GetDoctors() (doctors []User, err error) {
+	if err := DB.Where("type=?", "doctor").Find(&doctors).Error; err != nil {
+		fmt.Print(err.Error())
+	}
+	return
+}
+
+func (doctor *User) GetDoctorDates() (dates []Date, err error) {
+	if err := DB.Where("doctor=?", doctor.Username).Find(&dates).Error; err != nil {
+		fmt.Print(err.Error())
+	}
+	return
+}
+func (owner *User) GetOwnerDates() (dates []Date, err error) {
+	if err := DB.Where("owner=?", owner.Username).Find(&dates).Error; err != nil {
+		fmt.Print(err.Error())
+	}
+	return
 }

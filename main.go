@@ -22,6 +22,7 @@ func main() {
 
 	protected := r.Group("/api/worker")
 	protected.Use(middlewares.JwtAuthMiddleware())
+	protected.GET("/getDoctors", controllers.GetDoctors)
 	protected.GET("/user", controllers.CurrentUser)
 	protected.POST("/dog/register", controllers.RegisterDog)
 	protected.POST("/dog/:dni/upload", controllers.FileUpload)
@@ -29,6 +30,7 @@ func main() {
 	protected.GET("/dog/getDog/:dni", controllers.FindDogByDNI)
 	protected.POST("/dog/diagnostic/newDiagnostic", controllers.RegisterDiagnostic)
 	protected.POST("/dog/diagnostic/:id/uploadFiles", controllers.UploadXrayBloodResult)
+	public.POST("/dog/date/register", controllers.RegisterDate)
 	r.Run(":8080")
 
 }

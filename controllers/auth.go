@@ -29,6 +29,12 @@ func CurrentUser(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+	switch u.Type {
+	case "doctor":
+		u.Dates, _ = u.GetDoctorDates()
+	case "patient":
+		u.Dates, _ = u.GetOwnerDates()
+	}
 
 	c.JSON(http.StatusOK, gin.H{"message": "success", "data": u})
 }
@@ -85,5 +91,14 @@ func Login(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"token": token})
+
+}
+
+func GetDoctors(c *gin.Context) {
+	doctors, err := models.GetDoctors()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+	}
+	c.JSON(http.StatusOK, gin.H{"data": doctors})
 
 }

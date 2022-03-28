@@ -32,7 +32,7 @@ func InitDB() {
 	}
 
 	DB = conn
-	DB.AutoMigrate(&User{}, &Dog{}, &Diagnostic{})
+	DB.AutoMigrate(&User{}, &Dog{}, &Diagnostic{}, &Date{})
 	DB.Model(&Diagnostic{}).AddForeignKey("dog_id", "dogs", "RESTRICT", "RESTRICT")
 	DB.Set("gorm:auto_preload", true)
 }
